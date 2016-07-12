@@ -14,6 +14,51 @@
 			}.bind(this), 'json');
 		},
 
+		components : {
+			transaction : {
+				template : '#transaction-template',
+				props : ['items', 'edit', 'remove'],
+				computed : {
+					subtotal : function() {
+						var subtotal = 0;
+
+						this.items.forEach(function(product){
+							subtotal += product.item.price * product.numberOfItems;
+						});
+
+						return subtotal;
+					},
+
+					tax : function() {
+						return this.subtotal * 0.065;
+					},
+
+					total: function() {
+						return this.subtotal + this.tax;
+					}
+				},
+
+				methods : {
+					toggleEdit : function(item) {
+						this.edit(item);
+					},
+					removeItem : function(item) {
+						this.remove(item);
+					}
+				}
+			},
+
+			itemList : {
+				template : "#item-list-template",
+				props : ['items', 'add'],
+				methods : {
+					itemClicked : function(item) {
+						this.add(item);
+					}
+				}
+			},
+		},
+
 		methods: {
 			onItemClick : function(item) {
 				var found = false;
@@ -46,25 +91,5 @@
 				});
 			}
 		}, 
-
-		computed : {
-			subtotal : function() {
-				var subtotal = 0;
-
-				this.lineItems.forEach(function(product){
-					subtotal += product.item.price * product.numberOfItems;
-				});
-
-				return subtotal;
-			},
-
-			tax : function() {
-				return this.subtotal * 0.065;
-			},
-
-			total: function() {
-				return this.subtotal + this.tax;
-			}
-		},
 	});
 })(jQuery, Vue);
