@@ -1,8 +1,8 @@
 (function($, Vue) {
 	'use strict';
 
-	var Vue = require('vue');
-	var $ 	= require('jquery');
+	/*var Vue = require('vue');
+	var $ 	= require('jquery');*/
 
 	new Vue({
 		el: '#pos',
