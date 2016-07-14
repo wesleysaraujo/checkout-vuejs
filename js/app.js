@@ -1,6 +1,9 @@
 (function($, Vue) {
 	'use strict';
 
+	var Vue = require('vue');
+	var $ 	= require('jquery');
+
 	new Vue({
 		el: '#pos',
 		data: {
@@ -15,48 +18,8 @@
 		},
 
 		components : {
-			transaction : {
-				template : '#transaction-template',
-				props : ['items', 'edit', 'remove'],
-				computed : {
-					subtotal : function() {
-						var subtotal = 0;
-
-						this.items.forEach(function(product){
-							subtotal += product.item.price * product.numberOfItems;
-						});
-
-						return subtotal;
-					},
-
-					tax : function() {
-						return this.subtotal * 0.065;
-					},
-
-					total: function() {
-						return this.subtotal + this.tax;
-					}
-				},
-
-				methods : {
-					toggleEdit : function(item) {
-						this.edit(item);
-					},
-					removeItem : function(item) {
-						this.remove(item);
-					}
-				}
-			},
-
-			itemList : {
-				template : "#item-list-template",
-				props : ['items', 'add'],
-				methods : {
-					itemClicked : function(item) {
-						this.add(item);
-					}
-				}
-			},
+			transaction : require('./components/transaction'),
+			itemList : require('./components/item-list')
 		},
 
 		methods: {

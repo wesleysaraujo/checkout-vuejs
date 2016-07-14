@@ -7,68 +7,18 @@
 
     <title>POS System</title>
 
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/font-awesome.min.css">
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
 <div class="container">
     <div class="row" id="pos">
-        <script id="item-list-template" type="text/x-template">
-            <div class="list-group">
-                <button class="list-group-item item" v-repeat="item : items" v-on="click: itemClicked(item)">
-                    <strong>{{ item.name }}</strong> - {{ item.price }}
-                </button>
-            </div>
-        </script>
-
-        <script id="transaction-template" type="text/x-template">
-            <table class="table table-striped table-hover table-bordered table-responsive" v-if="items.length">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Qtd</th>
-                        <th>Preço</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-repeat="line : items">
-                        <td>{{line.item.name}}</td>
-                        <td>
-                            <span v-if="!line.editing" v-on="dblclick : toggleEdit(line)">{{ line.numberOfItems }}</span>
-                            <input v-if="line.editing" v-on="blur :  toggleEdit(line)" type="number" v-model="line.numberOfItems">
-                        </td>
-                        <td>{{ line.numberOfItems * line.item.price | currency 'R$ '}}</td>
-                        <td><i class="fa fa-times" v-on="click: removeItem(line)"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-            <p v-if="!items.length">Nenhum produto foi adicionado.</p>
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>Subtotal:</td>
-                        <td>{{ subtotal | currency 'R$ '}}</td>
-                    </tr>
-                    <tr>
-                        <td>Tax:</td>
-                        <td>{{ tax | currency 'R$ '}}</td>
-                    </tr>
-                    <tr>
-                        <td>Total:</td>
-                        <td>{{ total | currency 'R$ '}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </script>
-
         <div class="col-md-10 col-md-offset-1">
             <h1>Lista de compras</h1>
             <div class="row">
                 <div class="col-md-6">
-
                     <transaction items="{{ lineItems }}" edit="{{ toggleEdit }}" remove="{{ removeItem }}"></transaction>
                 </div>
                 <div class="col-md-6">
@@ -80,8 +30,8 @@
 </div>
 
 
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/node_modules/vue/dist/vue.min.js"></script>
-<script src="/js/app.js"></script>
+<script src="assets/js/vendor/jquery.min.js"></script>
+<script src="assets/js/vendor/vue.min.js"></script>
+<script src="assets/js/bundle.js"></script>
 </body>
 </html>
